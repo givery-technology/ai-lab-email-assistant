@@ -66,4 +66,4 @@ PROMPT_INSTRUCTIONS = {
 DEFAULT_PORT = 7860
 
 # Logging settings
-LOG_DIR = "email_logs"
+LOG_DIR = "logs"

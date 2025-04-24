@@ -117,7 +117,7 @@ def main():
     validate_env_vars()
     
     # Set up logger
-    logger = EmailAssistantLogger(log_dir="email_logs")
+    logger = EmailAssistantLogger(log_dir="logs")
     info("Email Assistant application starting")
     
     # Set up language models

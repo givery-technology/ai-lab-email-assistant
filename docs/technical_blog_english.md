@@ -12,6 +12,12 @@ The Email Assistant is an AI-powered agent built with LangGraph, LangChain, and 
 
 ![System Architecture Diagram](./img/email_assistance_flowchart_english.png)
 
+### Demo (GIF)
+
+See a short demo of the email assistant in action below.
+
+![Email Assistant Demo GIF](./demo-en.gif)
+
 ## Why Long-Term Memory Matters
 
 Standard LLM applications often lack persistent memory, meaning they treat each interaction independently. This prevents them from:
@@ -129,6 +135,12 @@ LangGraph provides the necessary framework for managing the state and complex co
     * **Storage:** System prompts, rules (e.g., triage rules), or instructions are stored persistently.
     * **Adaptation:** Use tools like LangMem's `create_multi_prompt_optimizer`. This component analyzes conversation history and user feedback (explicit or implicit) to suggest improvements to the stored prompts/rules.
     * **Mechanism:** Often handled asynchronously ("Subconscious Formation") to avoid adding latency to the main interaction loop. The optimizer generates refined prompts, which then update the procedural memory for future interactions.
+
+### GitHub Repository
+
+The source code for this email assistant is available in the following GitHub repository:
+
+[https://github.com/givery-technology/ai-lab-email-assistant.git](https://github.com/givery-technology/ai-lab-email-assistant.git)
 
 ## Best Practices
 
