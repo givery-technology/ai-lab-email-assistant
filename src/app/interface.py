@@ -44,7 +44,7 @@ def format_messages_for_chatbot(messages):
         elif message.type == 'tool':
             # Tool calls are shown as assistant messages with tool prefix
             tool_name = message.name if hasattr(message, 'name') else "Unknown Tool"
-            tool_message = f"🛠️ Tool Call: {tool_name}\n{content}"
+            tool_message = f"🛠️ ツール実行: {tool_name}\n{content}"
             formatted_messages.append({
                 "role": "assistant",
                 "content": tool_message
@@ -53,7 +53,7 @@ def format_messages_for_chatbot(messages):
             # Other message types shown as system messages
             formatted_messages.append({
                 "role": "system",
-                "content": f"System: {content}"
+                "content": f"システム: {content}"
             })
     
     return formatted_messages
@@ -99,17 +99,17 @@ def process_email(email_agent, store, llm, user_id, author, to, subject, email_b
     
     # Format the classification result for display
     classification_map = {
-        "respond": "📧 RESPOND - This email requires a response",
-        "ignore": "🚫 IGNORE - This email can be safely ignored",
-        "notify": "🔔 NOTIFY - This email contains important information"
+        "respond": "📧 返信が必要 - このメールには返信が必要です",
+        "ignore": "🚫 無視してよい - このメールは無視しても問題ありません",
+        "notify": "🔔 通知 - このメールには重要な情報が含まれています"
     }
-    classification_text = classification_map.get(classification, f"Unknown: {classification}")
+    classification_text = classification_map.get(classification, f"不明: {classification}")
     
     # Create the classification result markdown
     classification_result = f"""
-## Classification: {classification_text}
+## 分類結果: {classification_text}
 
-### Reasoning:
+### 理由:
 {reasoning}
 """
     
@@ -133,36 +133,36 @@ def create_gradio_interface(email_agent, store, llm):
     Returns:
         gr.Blocks: The Gradio interface.
     """
-    with gr.Blocks(title="Email Assistant") as demo:
-        gr.Markdown("# Email Assistant with LangGraph Memory")
-        gr.Markdown("Process emails and get AI-powered responses with long-term memory capabilities.")
+    with gr.Blocks(title="メールアシスタント") as demo:
+        gr.Markdown("# メールアシスタント with LangGraph メモリー")
+        gr.Markdown("メールを処理し、長期記憶機能を備えたAIによる返答を得ることができます。")
         
         with gr.Row():
             # Input column
             with gr.Column():
-                gr.Markdown("### Email Input")
-                user_id = gr.Textbox(label="User ID", value="user123", info="Used for memory namespacing")
-                author = gr.Textbox(label="From", placeholder="e.g., Alice Smith <alice.smith@company.com>")
-                to = gr.Textbox(label="To", placeholder="e.g., John Doe <john.doe@company.com>")
-                subject = gr.Textbox(label="Subject", placeholder="Quick question about API documentation")
-                email_body = gr.Textbox(label="Email Body", lines=10, placeholder="Hi John,\n\nI was reviewing the API documentation...")
-                process_button = gr.Button("Process Email", variant="primary")
+                gr.Markdown("### メール入力")
+                user_id = gr.Textbox(label="ユーザーID", value="user123", info="メモリの名前空間に使用されます")
+                author = gr.Textbox(label="差出人", placeholder="例: 田中花子 <hanako.tanaka@company.com>")
+                to = gr.Textbox(label="宛先", placeholder="例: 鈴木一郎 <ichiro.suzuki@company.com>")
+                subject = gr.Textbox(label="件名", placeholder="APIドキュメントについての質問")
+                email_body = gr.Textbox(label="メール本文", lines=10, placeholder="鈴木様\n\nAPIドキュメントを確認していたのですが...\n\n田中")
+                process_button = gr.Button("メールを処理", variant="primary")
             
             # Output column
             with gr.Column():
-                gr.Markdown("### Email Analysis")
-                classification_output = gr.Markdown(label="Classification Result")
-                chatbot_output = gr.Chatbot(label="Agent Interaction", height=400, type="messages")
+                gr.Markdown("### メール分析")
+                classification_output = gr.Markdown(label="分類結果")
+                chatbot_output = gr.Chatbot(label="エージェントとのやりとり", height=400, type="messages")
                 
-                with gr.Accordion("Provide Feedback & Optimize", open=False):
-                    gr.Markdown("Help improve the assistant by providing feedback on responses:")
+                with gr.Accordion("フィードバックと最適化", open=False):
+                    gr.Markdown("返答に対するフィードバックを提供して、アシスタントの改善に協力してください：")
                     feedback_input = gr.Textbox(
-                        label="Feedback", 
-                        placeholder="E.g., 'Always sign your emails with John Doe' or 'Ignore emails from marketing@company.com'",
+                        label="フィードバック", 
+                        placeholder="例: 'メールの最後は必ず「鈴木一郎」と署名してください' または 'marketing@company.comからのメールは無視してください' または 'build@company.comからのメールは無視してください'",
                         lines=2
                     )
-                    feedback_button = gr.Button("Submit Feedback & Optimize", variant="secondary")
-                    optimization_result = gr.Markdown(label="Optimization Result")
+                    feedback_button = gr.Button("フィードバックを送信して最適化", variant="secondary")
+                    optimization_result = gr.Markdown(label="最適化結果")
         
         # Set up state for storing messages
         saved_messages_state = gr.State([])
@@ -194,22 +194,22 @@ def create_gradio_interface(email_agent, store, llm):
         
         # Add tabs for main interface and prompt editing
         with gr.Tabs():
-            with gr.TabItem("Email Processing"):
-                gr.Markdown("This is the main email processing interface above.")
+            with gr.TabItem("メール処理"):
+                gr.Markdown("上記がメイン処理画面です。")
                 
-            with gr.TabItem("Prompt Management"):
-                gr.Markdown("### View and Edit Prompts")
-                gr.Markdown("View and customize the prompts used by the Email Assistant.")
+            with gr.TabItem("プロンプト管理"):
+                gr.Markdown("### プロンプトの閲覧と編集")
+                gr.Markdown("メールアシスタントで使用されるプロンプトをカスタマイズできます。")
                 
-                prompt_user_id = gr.Textbox(label="User ID", value="user123", info="Enter the user ID to load/save prompts for")
-                load_prompts_btn = gr.Button("Load Prompts")
+                prompt_user_id = gr.Textbox(label="ユーザーID", value="user123", info="プロンプトを読み込み/保存するユーザーIDを入力してください")
+                load_prompts_btn = gr.Button("プロンプトを読み込む")
                 
-                main_agent_prompt = gr.TextArea(label="Main Agent Instructions", lines=5, placeholder="Instructions for the main agent...")
-                ignore_prompt_input = gr.TextArea(label="Triage - Ignore Rules", lines=5, placeholder="Rules for ignoring emails...")
-                notify_prompt_input = gr.TextArea(label="Triage - Notify Rules", lines=5, placeholder="Rules for email notifications...")
-                respond_prompt_input = gr.TextArea(label="Triage - Respond Rules", lines=5, placeholder="Rules for responding to emails...")
+                main_agent_prompt = gr.TextArea(label="メインエージェントの指示", lines=5, placeholder="メインエージェントへの指示...")
+                ignore_prompt_input = gr.TextArea(label="振り分け - 無視ルール", lines=5, placeholder="メールを無視するためのルール...")
+                notify_prompt_input = gr.TextArea(label="振り分け - 通知ルール", lines=5, placeholder="メール通知のルール...")
+                respond_prompt_input = gr.TextArea(label="振り分け - 返信ルール", lines=5, placeholder="メールに返信するためのルール...")
                 
-                save_prompts_btn = gr.Button("Save Prompts", variant="primary")
+                save_prompts_btn = gr.Button("プロンプトを保存", variant="primary")
                 prompt_status = gr.Markdown()
                 
                 # Function to handle prompt loading
@@ -239,24 +239,24 @@ def create_gradio_interface(email_agent, store, llm):
             [
                 [
                     "user123",
-                    "Alice Smith <alice.smith@company.com>",
-                    "John Doe <john.doe@company.com>",
-                    "Quick question about API documentation",
-                    "Hi John,\n\nI was reviewing the API documentation for the new authentication service and noticed a few endpoints seem to be missing from the specs. Could you help clarify if this was intentional or if we should update the docs?\n\nSpecifically, I'm looking at:\n- /auth/refresh\n- /auth/validate\n\nThanks!\nAlice"
+                    "田中花子 <hanako.tanaka@company.com>",
+                    "鈴木一郎 <ichiro.suzuki@company.com>",
+                    "プロジェクト状況について",
+                    "鈴木様\n\n明日、プロジェクトの状況について簡単に打ち合わせできますでしょうか？\n\nよろしくお願いいたします。\n田中"
                 ],
                 [
                     "user123",
-                    "Marketing Team <marketing@company.com>",
-                    "All Staff <all-staff@company.com>",
-                    "Exciting New Product Launch Next Week!",
-                    "Hello everyone,\n\nWe're thrilled to announce our exciting new product launch next week! Join us for the virtual event on Friday at 2pm.\n\nBest regards,\nMarketing Team"
+                    "マーケティングチーム <marketing@company.com>",
+                    "全社員 <all-staff@company.com>",
+                    "【お知らせ】来週の新製品発表について",
+                    "皆様\n\n来週金曜日14時から新製品発表会を開催いたします。ぜひご参加ください。\n\n以上\nマーケティングチーム"
                 ],
                 [
                     "user123",
-                    "Build System <build@company.com>",
-                    "Engineering <engineering@company.com>",
-                    "[ALERT] Build failure in main branch",
-                    "Build #4592 has failed in main branch.\n\nFailure: Unit tests failing in auth module.\nSee build logs: https://build.company.com/4592"
+                    "ビルドシステム <build@company.com>",
+                    "エンジニアリング <engineering@company.com>",
+                    "【警告】mainブランチのビルド失敗",
+                    "ビルド #4592 がmainブランチで失敗しました。\n\n原因: 認証モジュールの単体テスト失敗\nログ詳細: https://build.company.com/4592"
                 ]
             ],
             inputs=[user_id, author, to, subject, email_body]

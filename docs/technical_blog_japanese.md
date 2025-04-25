@@ -16,9 +16,9 @@
 
 メールアシスタントが動作する様子の短いデモを、以下のリンクからYouTubeでご覧いただけます。
 
-* [YouTubeでデモを視聴](https://youtu.be/ch8ZLBR_4O0)
+* [YouTubeでデモを視聴](https://youtu.be/8JT1aRQ5bbY)
 
-https://youtu.be/ch8ZLBR_4O0
+https://youtu.be/8JT1aRQ5bbY
 
 
 ## 長期記憶が重要な理由
