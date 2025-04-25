@@ -10,13 +10,15 @@ This article explores how to construct an AI agent, exemplified by an email assi
 
 The Email Assistant is an AI-powered agent built with LangGraph, LangChain, and Azure OpenAI. It demonstrates the implementation of advanced memory capabilities in intelligent agents, allowing the system to learn from interactions, remember facts, and adapt its behavior over time.
 
-![System Architecture Diagram](./img/email_assistance_flowchart_english.png)
+![System Architecture Diagram](./img/email_assistance_flowchart_english.jpg)
 
-### Demo (GIF)
+## Demo
 
-See a short demo of the email assistant in action below.
+Watch a short demo of the email assistant in action on YouTube via the link below.
 
-![Email Assistant Demo GIF](./demo-en.gif)
+* [Watch Demo on YouTube](https://youtu.be/ch8ZLBR_4O0)
+
+https://youtu.be/ch8ZLBR_4O0
 
 ## Why Long-Term Memory Matters
 
@@ -140,7 +142,7 @@ LangGraph provides the necessary framework for managing the state and complex co
 
 The source code for this email assistant is available in the following GitHub repository:
 
-[https://github.com/givery-technology/ai-lab-email-assistant.git](https://github.com/givery-technology/ai-lab-email-assistant.git)
+https://github.com/givery-technology/ai-lab-email-assistant.git
 
 ## Best Practices
 

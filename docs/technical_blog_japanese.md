@@ -10,13 +10,16 @@
 
 メールアシスタントは、LangGraph、LangChain、Azure OpenAI を使用して構築された AI 搭載エージェントです。インテリジェントエージェントにおける高度なメモリ機能の実装を示しており、システムがインタラクションから学習し、事実を記憶し、時間の経過とともにその動作を適応させることを可能にします。
 
-![システムアーキテクチャ図](./img/email_assistance_flowchart_japanese.png)
+![システムアーキテクチャ図](./img/email_assistance_flowchart_japanese.jpg)
 
-### デモ (Demo GIF)
+## デモ
 
-メールアシスタントの動作を示す短いデモをご覧ください。
+メールアシスタントが動作する様子の短いデモを、以下のリンクからYouTubeでご覧いただけます。
 
-![メールアシスタント デモ GIF](./demo-en.gif)
+* [YouTubeでデモを視聴](https://youtu.be/ch8ZLBR_4O0)
+
+https://youtu.be/ch8ZLBR_4O0
+
 
 ## 長期記憶が重要な理由
 
@@ -140,7 +143,7 @@ LangGraph は、メモリ対応エージェントに必要な状態と複雑な�
 
 このメールアシスタントのソースコードは以下のGitHubリポジトリで公開されています。
 
-[https://github.com/givery-technology/ai-lab-email-assistant.git](https://github.com/givery-technology/ai-lab-email-assistant.git)
+https://github.com/givery-technology/ai-lab-email-assistant.git
 
 ## ベストプラクティス
 
